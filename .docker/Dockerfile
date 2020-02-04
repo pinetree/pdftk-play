@@ -2,7 +2,8 @@ FROM php:7.1-fpm
 
 MAINTAINER Descamps Antoine <antoine.descamps@ineat-conseil.fr>
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1 \
+  && apt-get install -y pdftk && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
