@@ -25,9 +25,10 @@ RUN apt-get update && mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1 \
         --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ \
         --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
-        --with-vpx-dir=/usr/lib/x86_64-linux-gnu/ \
+        --with-vpx-dir=/usr/lib/x86_64-linux-gnu/
 
-RUN mkdir -p /var/www/html/public/work
-RUN chown newuser /var/www/html/public/work
-USER newuser
+RUN mkdir -p ~/work && chmod 755 ~/work
+RUN chown www-data ~/work
+USER www-data
 WORKDIR /var/www/html/public/work
+
