@@ -26,3 +26,8 @@ RUN apt-get update && mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1 \
         --with-jpeg-dir=/usr/include/ \
         --with-xpm-dir=/usr/lib/x86_64-linux-gnu/ \
         --with-vpx-dir=/usr/lib/x86_64-linux-gnu/ \
+
+RUN mkdir -p /var/www/html/public/work
+RUN chown newuser /var/www/html/public/work
+USER newuser
+WORKDIR /var/www/html/public/work
