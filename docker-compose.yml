@@ -10,7 +10,6 @@ services:
         restart: always
         depends_on:
             - php
-            - db
     php:
         build: .docker
         restart: always
@@ -22,14 +21,3 @@ services:
         volumes:
             - ./app:/app
         command: install
-    db:
-        image: postgres:10.1
-        restart: always
-        environment:
-            - POSTGRES_DB=${DB_NAME}
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-        ports:
-            - 5432:5432
-        volumes:
-            - ./.docker/conf/postgres/:/docker-entrypoint-initdb.d/
