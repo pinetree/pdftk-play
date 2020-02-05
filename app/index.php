@@ -13,29 +13,11 @@ $pdf = new Pdf('/var/www/html/public/template.pdf', [
 ]);
 $pdf->tempDir = '/var/www/html/public/work';
 
-$name = getName($data);
-
 if (!$pdf
-    ->fillForm(
-        array_merge([
-            'personName' => $name,
-            'personRole' => getRole($data)
-        ], $data)
-    )
+    ->fillForm($data)
     ->flatten()
-    ->send(preg_replace('/[\s]+/', '_', $name) . '.pdf', true)) {
+    ->send(preg_replace('/[\s]+/', '_', $data['personName']) . '.pdf', true)) {
 
     $error = $pdf->getError();
     echo $error;
-}
-
-function getName($data, $glue = ' ')
-{
-    return implode($glue,
-        [$data['personInfo.lastName'], $data['personInfo.firstName'], $data['personInfo.patronymic']]);
-}
-
-function getRole($data)
-{
-    return $data['personInfo.role'] === 'borrower' ? 'Заёмщик' : 'Созаёмщик';
 }
