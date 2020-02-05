@@ -9,4 +9,4 @@ RUN apt-get update && mkdir -p /usr/share/man/man1mkdir -p /usr/share/man/man1 \
 
 RUN mkdir -p ~/work && chmod 755 ~/work
 RUN chown www-data ~/work
-USER www-data
+USER root
