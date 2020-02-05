@@ -213,13 +213,6 @@ class Command extends BaseCommand
         if ($filename !== null) {
             $this->addArg(' > ', $filename, false);
         }
-        foreach ($this->_options as $option) {
-            if (is_array($option)) {
-                $this->addArg($option[0], $option[1], $option[2]);
-            } else {
-            //    $this->addArg($option);
-            }
-        }
     }
 
     /**
@@ -232,7 +225,20 @@ class Command extends BaseCommand
             if ($value instanceof TmpFile) {
                 $value = (string) $value;
             }
-            $this->addArg($this->_operation, $value, $this->_escapeOperationArgument);
+
+            $operationWithOptions = $this->_operation.' - output';
+
+            foreach ($this->_options as $option) {
+                if (is_array($option)) {
+                    // do need these options yet
+                    //$this->addArg($option[0], $option[1], $option[2]);
+                } else {
+                    $operationWithOptions .= ' - '.$option;
+                }
+            }
+            $operationWithOptions .= ' < ';
+
+            $this->addArg($operationWithOptions, $value, $this->_escapeOperationArgument);
         }
     }
 

@@ -16,23 +16,23 @@ $pdf->tempDir = '/var/www/html/public/work';
 $name = getName($data);
 
 if (!$pdf
-    //->allow('AllFeatures')
     ->fillForm(
-        array_merge(
-            [
-                'personName' => $name,
-                'personRole' => getRole($data)
-            ], $data))
+        array_merge([
+            'personName' => $name,
+            'personRole' => getRole($data)
+        ], $data)
+    )
+    ->flatten()
     ->send(preg_replace('/[\s]+/', '_', $name) . '.pdf', true)) {
 
     $error = $pdf->getError();
-
     echo $error;
 }
 
 function getName($data, $glue = ' ')
 {
-    return implode($glue, [$data['personInfo.lastName'], $data['personInfo.firstName'], $data['personInfo.patronymic']]);
+    return implode($glue,
+        [$data['personInfo.lastName'], $data['personInfo.firstName'], $data['personInfo.patronymic']]);
 }
 
 function getRole($data)
