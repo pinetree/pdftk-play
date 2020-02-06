@@ -5,7 +5,7 @@ use mikehaertl\pdftk\Pdf;
 
 error_reporting(E_ERROR);
 
-$data = json_decode(stripslashes($_POST['data']), true);;
+$data = json_decode(stripslashes($_POST['data']), true);
 
 if (!$data)
     exit;
