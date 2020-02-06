@@ -7,6 +7,9 @@ error_reporting(E_ERROR);
 
 $data = json_decode(stripslashes($_POST['data']), true);;
 
+if (!$data)
+    exit;
+
 $pdf = new Pdf('/var/www/html/public/template.pdf', [
     'command' => 'java -jar /var/www/html/mcpdf/mcpdf.jar',
 ]);

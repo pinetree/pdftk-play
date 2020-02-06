@@ -17,7 +17,6 @@ services:
             - ./.docker/conf/php/php.ini:/usr/local/etc/php/conf.d/php.ini
             - ./.docker/mcpdf:/var/www/html/mcpdf
             - ./.docker/pdffiller:/var/www/html/pdffiller
-            - ./.docker/mikehaertl:/var/www/html/public/vendor/mikehaertl
             - ./app:/var/www/html/public
     composer:
         image: composer

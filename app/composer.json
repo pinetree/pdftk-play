@@ -4,7 +4,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": "~7.3",
-    "mikehaertl/php-pdftk": "~0.8.0"
+    "pinetree/php-pdftk": "~0.8.1"
 
   },
   "require-dev": {
