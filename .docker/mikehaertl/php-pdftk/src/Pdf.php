@@ -262,7 +262,7 @@ class Pdf
         }
         $this->getCommand()
             ->setOperation('fill_form')
-            ->setOperationArgument($data, true);
+            ->setOperationArgument($data, false);
 
         if ($dropXfa) {
             $this->dropXfa();
@@ -286,7 +286,7 @@ class Pdf
         }
         $this->getCommand()
             ->setOperation($encoding == 'UTF-8' ? 'update_info_utf8' : 'update_info')
-            ->setOperationArgument($data, true);
+            ->setOperationArgument($data, false);
 
         return $this;
     }
@@ -306,7 +306,7 @@ class Pdf
         $this->constrainSingleFile();
         $this->getCommand()
             ->setOperation('background')
-            ->setOperationArgument($file, true);
+            ->setOperationArgument($file, false);
         return $this;
     }
 
@@ -324,7 +324,7 @@ class Pdf
     {
         $this->getCommand()
             ->setOperation('multibackground')
-            ->setOperationArgument($file, true);
+            ->setOperationArgument($file, false);
         return $this;
     }
 
@@ -342,7 +342,7 @@ class Pdf
         $this->constrainSingleFile();
         $this->getCommand()
             ->setOperation('stamp')
-            ->setOperationArgument($file, true);
+            ->setOperationArgument($file, false);
         return $this;
     }
 
@@ -360,7 +360,7 @@ class Pdf
     {
         $this->getCommand()
             ->setOperation('multistamp')
-            ->setOperationArgument($file, true);
+            ->setOperationArgument($file, false);
         return $this;
     }
 

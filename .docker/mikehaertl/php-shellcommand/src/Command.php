@@ -375,10 +375,6 @@ class Command
             return false;
         }
 
-        // replace escapes and unknown drop_xfa option (which causes an error)
-        $command = str_replace("'", " ", $command);
-        $command = str_replace("- drop_xfa", " ", $command);
-
         if ($this->useExec) {
             $execCommand = $this->captureStdErr ? "$command 2>&1" : $command;
             exec($execCommand, $output, $this->_exitCode);

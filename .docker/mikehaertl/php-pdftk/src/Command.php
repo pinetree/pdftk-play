@@ -1,4 +1,5 @@
 <?php
+
 namespace mikehaertl\pdftk;
 
 use mikehaertl\shellcommand\Command as BaseCommand;
@@ -18,6 +19,8 @@ class Command extends BaseCommand
      * @var string the pdftk binary
      */
     protected $_command = 'pdftk';
+
+    public $escapeArgs = false;
 
     /**
      * @var array list of input files to process as array('name' => $filename,
@@ -120,7 +123,7 @@ class Command extends BaseCommand
     public function getOperationArgument()
     {
         // Typecast to string in case we have a File instance as argument
-        return is_array($this->_operationArgument) ? $this->_operationArgument : (string) $this->_operationArgument;
+        return is_array($this->_operationArgument) ? $this->_operationArgument : (string)$this->_operationArgument;
     }
 
     /**
@@ -178,6 +181,7 @@ class Command extends BaseCommand
         $this->processInputFiles();
         $this->processOperation();
         $this->processOptions($filename);
+
         return parent::execute();
     }
 
@@ -223,17 +227,18 @@ class Command extends BaseCommand
         if ($this->_operation !== null) {
             $value = $this->_operationArgument ? $this->_operationArgument : null;
             if ($value instanceof TmpFile) {
-                $value = (string) $value;
+                $value = (string)$value;
             }
 
-            $operationWithOptions = $this->_operation.' - output';
+            $operationWithOptions = $this->_operation . ' - output';
 
             foreach ($this->_options as $option) {
                 if (is_array($option)) {
                     // do need these options yet
                     //$this->addArg($option[0], $option[1], $option[2]);
-                } else {
-                    $operationWithOptions .= ' - '.$option;
+                } elseif ($option !== 'drop_xfa') {
+                    // drop_xfa causes Unknown operation in mcdpf.jar
+                    $operationWithOptions .= ' - ' . $option;
                 }
             }
             $operationWithOptions .= ' < ';
